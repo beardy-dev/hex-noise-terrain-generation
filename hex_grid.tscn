@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dgqnjeflanbjl"]
+
+[ext_resource type="Script" uid="uid://dbhst2vgp6yv2" path="res://hex_grid.gd" id="1_esttd"]
+[ext_resource type="Texture2D" uid="uid://bxaulu24mcipm" path="res://terrain_hexes.png" id="1_kpu3p"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_esttd"]
+texture = ExtResource("1_kpu3p")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ry22t"]
+tile_shape = 3
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_esttd")
+
+[node name="HexGrid" type="Node2D" unique_id=972044332]
+script = ExtResource("1_esttd")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1721154715]
+tile_set = SubResource("TileSet_ry22t")

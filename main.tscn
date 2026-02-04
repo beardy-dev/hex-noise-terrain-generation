@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dsp85virm6xdm"]
+
+[ext_resource type="PackedScene" uid="uid://dgqnjeflanbjl" path="res://hex_grid.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://beeie648i07vv" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b07hrhya5qd4x" path="res://ui.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node" unique_id=5303277]
+script = ExtResource("1_h2yge")
+
+[node name="HexGrid" parent="." unique_id=972044332 instance=ExtResource("1_0xm2m")]
+
+[node name="UI" parent="." unique_id=1554920079 instance=ExtResource("2_h2yge")]
+
+[connection signal="coastConditionChanged" from="UI" to="." method="_on_ui_coast_condition_changed"]
+[connection signal="islandConditionChanged" from="UI" to="." method="_on_ui_island_condition_changed"]
+[connection signal="perlinScaleChange" from="UI" to="." method="_on_ui_perlin_scale_change"]
+[connection signal="worleyScaleChange" from="UI" to="." method="_on_ui_worley_scale_change"]

@@ -1,19 +1,39 @@
 extends Node2D
 
-@onready var terrainMapLayer = $TileMapLayer
-var perlinScale: float = 0.75
+@onready var terrainMapLayer : TileMapLayer = $TileMapLayer
+var perlinScale: float = 0.05
+var worleyScale: float = 0.05
+var islandCondition: float = 0.5
+var coastCondition: float = 0.5
+var enablePerlin: bool = true
+var enableWorley: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	generateTileMap()
+			
+func generateTileMap() -> void:
 	var grid: Vector2i = calcGridSize()
 		
 	for x in range(-1, grid.x):
 		for y in range(-1, grid.y):
-			var rawPerlin = perlin(x*perlinScale, y*perlinScale)
-			var normalizedPerlin = (rawPerlin + 1) * 0.5
-			var tileId = 0 if normalizedPerlin < 0.5 else 1
-			terrainMapLayer.set_cell(Vector2(x, y), 0, Vector2(tileId, 0))
+			placeTile(x,y)
+	
 
+func placeTile(x: int, y: int) -> void:
+	var worleyVal = worley(float(x) * worleyScale, float(y) * worleyScale) / 1.414
+	var perlinVal = (perlin(float(x) * perlinScale, float(y) * perlinScale) + 1) * 0.5
+	
+	var islandStrength = clamp(1.0 - (worleyVal / islandCondition), 0.0, 1.0)
+	var coastNoise = perlinVal * islandStrength
+	
+	var tileId = 1 if coastNoise < coastCondition else 0
+	
+	terrainMapLayer.set_cell(Vector2(x,y), 0, Vector2(tileId, 0))
+
+func generateNoiseVal(x: int, y: int) -> float:
+	#return (perlin(float(x) * perlinScale, float(y) * perlinScale) + 1)  * 0.5
+	return worley(x * worleyScale, y * worleyScale)
 
 func calcGridSize() -> Vector2i:
 	var windowSize: Vector2i = get_window().size
@@ -27,7 +47,7 @@ func calcGridSize() -> Vector2i:
 func _process(delta: float) -> void:
 	pass
 	
-func perlin(x, y) -> float:
+func perlin(x : float, y : float) -> float:
 	var x0 = floor(x)
 	var y0 = floor(y)
 	var x1 = x0 + 1
@@ -57,9 +77,36 @@ func perlin(x, y) -> float:
 	return lerp(nx0, nx1, v)
 		
 func gradient(ix, iy) -> Vector2:
-	var hash = randf_range(ix, iy)
-	var angle = hash * (PI * 2)
+	var h = int(ix) * 1836311903 ^ int(iy) * 2971215073
+	h = (h << 13) ^ h
+	var angle := float((h * (h * h * 15731 + 789221) + 1376312589) & 0x7fffffff) / 2147483648.0
+	angle *= TAU
 	return Vector2(cos(angle), sin(angle))
 	
 func fade(t):
-	return pow(6*t,5) - pow(15 * t, 4) + pow(10 * t, 3)
+	return 6 * pow(t,5) - 15 * pow(t, 4) + 10 * pow(t, 3)
+
+func hash2(ix: int, iy: int) -> float:
+	var h := ix * 374761393 + iy * 668265263
+	h = (h ^ (h >> 13)) * 1274126177
+	h = h ^ (h >> 16)
+	return float(h & 0x7fffffff) / 2147483648.0
+	
+func feature_point(ix: int, iy: int) -> Vector2:
+	var rx = hash2(ix, iy)
+	var ry = hash2(ix + 19, iy + 47)
+	return Vector2(ix + rx, iy + ry)
+
+func worley(x: float, y: float) -> float:
+	var cx := int(floor(x))
+	var cy := int(floor(y))
+
+	var min_dist := INF
+
+	for ox in range(-1, 2):
+		for oy in range(-1, 2):
+			var fp := feature_point(cx + ox, cy + oy)
+			var d := Vector2(x, y).distance_to(fp)
+			min_dist = min(min_dist, d)
+
+	return min_dist

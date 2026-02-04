@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://b07hrhya5qd4x"]
+
+[ext_resource type="Script" uid="uid://0db0xg0gf3w7" path="res://ui.gd" id="1_fyqef"]
+
+[node name="UI" type="CanvasLayer" unique_id=1554920079]
+script = ExtResource("1_fyqef")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1479748117]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -196.5
+offset_right = 196.5
+offset_bottom = 90.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Controls" type="HBoxContainer" parent="PanelContainer" unique_id=2109917301]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Controls" unique_id=304555276]
+layout_mode = 2
+
+[node name="PerlinScaleBox" type="VBoxContainer" parent="PanelContainer/Controls/VBoxContainer" unique_id=1129899427]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Controls/VBoxContainer/PerlinScaleBox" unique_id=1923851807]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Controls/VBoxContainer/PerlinScaleBox/HBoxContainer" unique_id=141206387]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Perlin Scale Value"
+horizontal_alignment = 1
+
+[node name="PerlinScaleValueLabel" type="Label" parent="PanelContainer/Controls/VBoxContainer/PerlinScaleBox/HBoxContainer" unique_id=396058125]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PerlinScaleInputSlider" type="HSlider" parent="PanelContainer/Controls/VBoxContainer/PerlinScaleBox" unique_id=1063415902]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 0.1
+step = 0.01
+value = 0.05
+tick_count = 11
+ticks_on_borders = true
+
+[node name="CoastConditionBox" type="VBoxContainer" parent="PanelContainer/Controls/VBoxContainer" unique_id=145020695]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Controls/VBoxContainer/CoastConditionBox" unique_id=1489075109]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Controls/VBoxContainer/CoastConditionBox/HBoxContainer" unique_id=710148114]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Coast  Condition Value"
+horizontal_alignment = 1
+
+[node name="CoastConditionValueLabel" type="Label" parent="PanelContainer/Controls/VBoxContainer/CoastConditionBox/HBoxContainer" unique_id=1340206034]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoastConditionInputSlider" type="HSlider" parent="PanelContainer/Controls/VBoxContainer/CoastConditionBox" unique_id=300915763]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.4
+max_value = 0.7
+step = 0.01
+value = 0.55
+tick_count = 11
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/Controls" unique_id=954782217]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/Controls" unique_id=476085848]
+layout_mode = 2
+
+[node name="WorleyScaleBox" type="VBoxContainer" parent="PanelContainer/Controls/VBoxContainer2" unique_id=2004159062]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Controls/VBoxContainer2/WorleyScaleBox" unique_id=873818459]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Controls/VBoxContainer2/WorleyScaleBox/HBoxContainer" unique_id=668729732]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Worley Scale Value"
+horizontal_alignment = 1
+
+[node name="WorleyScaleValueLabel" type="Label" parent="PanelContainer/Controls/VBoxContainer2/WorleyScaleBox/HBoxContainer" unique_id=59219588]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WorleyScaleInputSlider" type="HSlider" parent="PanelContainer/Controls/VBoxContainer2/WorleyScaleBox" unique_id=1092258837]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 0.1
+step = 0.01
+value = 0.05
+tick_count = 11
+ticks_on_borders = true
+
+[node name="IslandConditionBox" type="VBoxContainer" parent="PanelContainer/Controls/VBoxContainer2" unique_id=116576418]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Controls/VBoxContainer2/IslandConditionBox" unique_id=1054188406]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/Controls/VBoxContainer2/IslandConditionBox/HBoxContainer" unique_id=1952850226]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Island Condition Value"
+horizontal_alignment = 1
+
+[node name="IslandConditionValueLabel" type="Label" parent="PanelContainer/Controls/VBoxContainer2/IslandConditionBox/HBoxContainer" unique_id=310211696]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IslandConditionInputSlider" type="HSlider" parent="PanelContainer/Controls/VBoxContainer2/IslandConditionBox" unique_id=491719553]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.4
+max_value = 0.7
+step = 0.01
+value = 0.55
+tick_count = 11
+
+[connection signal="value_changed" from="PanelContainer/Controls/VBoxContainer/PerlinScaleBox/PerlinScaleInputSlider" to="." method="perlinScaleValueChange"]
+[connection signal="value_changed" from="PanelContainer/Controls/VBoxContainer/CoastConditionBox/CoastConditionInputSlider" to="." method="coastConditionValueChange"]
+[connection signal="value_changed" from="PanelContainer/Controls/VBoxContainer2/WorleyScaleBox/WorleyScaleInputSlider" to="." method="worleyScaleValueChange"]
+[connection signal="value_changed" from="PanelContainer/Controls/VBoxContainer2/IslandConditionBox/IslandConditionInputSlider" to="." method="IslandConditionValueChange"]

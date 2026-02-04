@@ -5,8 +5,8 @@ var perlinScale: float = 0.05
 var worleyScale: float = 0.05
 var islandCondition: float = 0.5
 var coastCondition: float = 0.5
-var enablePerlin: bool = true
-var enableWorley: bool = true
+var worldSeed : int = randi()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +22,7 @@ func generateTileMap() -> void:
 
 func placeTile(x: int, y: int) -> void:
 	var worleyVal = worley(float(x) * worleyScale, float(y) * worleyScale) / 1.414
-	var perlinVal = (perlin(float(x) * perlinScale, float(y) * perlinScale) + 1) * 0.5
+	var perlinVal = (perlin(float(x + worldSeed * 1000) * perlinScale, float(y + worldSeed * 1000) * perlinScale) + 1) * 0.5
 	
 	var islandStrength = clamp(1.0 - (worleyVal / islandCondition), 0.0, 1.0)
 	var coastNoise = perlinVal * islandStrength
@@ -77,7 +77,7 @@ func perlin(x : float, y : float) -> float:
 	return lerp(nx0, nx1, v)
 		
 func gradient(ix, iy) -> Vector2:
-	var h = int(ix) * 1836311903 ^ int(iy) * 2971215073
+	var h = int(ix) * 1836311903 + worldSeed ^ int(iy) * 2971215073 + worldSeed
 	h = (h << 13) ^ h
 	var angle := float((h * (h * h * 15731 + 789221) + 1376312589) & 0x7fffffff) / 2147483648.0
 	angle *= TAU
@@ -87,7 +87,7 @@ func fade(t):
 	return 6 * pow(t,5) - 15 * pow(t, 4) + 10 * pow(t, 3)
 
 func hash2(ix: int, iy: int) -> float:
-	var h := ix * 374761393 + iy * 668265263
+	var h := ix * 374761393 + worldSeed + iy * 668265263 + worldSeed
 	h = (h ^ (h >> 13)) * 1274126177
 	h = h ^ (h >> 16)
 	return float(h & 0x7fffffff) / 2147483648.0

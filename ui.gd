@@ -6,19 +6,19 @@ signal worleyScaleChange
 signal coastConditionChanged
 
 # Perlin Scale Input Controls
-@onready var perlinScaleSlider : HSlider = $PanelContainer/Controls/VBoxContainer/PerlinScaleBox/PerlinScaleInputSlider
-@onready var perlinScaleLabel : Label = $PanelContainer/Controls/VBoxContainer/PerlinScaleBox/HBoxContainer/PerlinScaleValueLabel
+@onready var perlinScaleSlider : HSlider = $PanelContainer/Controls/PerlinScaleBox/PerlinScaleInputSlider
+@onready var perlinScaleLabel : Label = $PanelContainer/Controls/PerlinScaleBox/HBoxContainer/PerlinScaleValueLabel
 
 # Worley Scale Input Controls
-@onready var worleyScaleSlider : HSlider = $PanelContainer/Controls/VBoxContainer2/WorleyScaleBox/WorleyScaleInputSlider
-@onready var worleyScaleLabel : Label = $PanelContainer/Controls/VBoxContainer2/WorleyScaleBox/HBoxContainer/WorleyScaleValueLabel
+@onready var worleyScaleSlider : HSlider = $PanelContainer/Controls/WorleyScaleBox/WorleyScaleInputSlider
+@onready var worleyScaleLabel : Label = $PanelContainer/Controls/WorleyScaleBox/HBoxContainer/WorleyScaleValueLabel
 
 # Sample Noise Condition Input Controls
-@onready var islandConditionSlider : HSlider = $PanelContainer/Controls/VBoxContainer2/IslandConditionBox/IslandConditionInputSlider
-@onready var islandConditionLabel : Label = $PanelContainer/Controls/VBoxContainer2/IslandConditionBox/HBoxContainer/IslandConditionValueLabel
+@onready var islandConditionSlider : HSlider = $PanelContainer/Controls/IslandConditionBox/IslandConditionInputSlider
+@onready var islandConditionLabel : Label = $PanelContainer/Controls/IslandConditionBox/HBoxContainer/IslandConditionValueLabel
 
-@onready var coastConditionSlider : HSlider = $PanelContainer/Controls/VBoxContainer/CoastConditionBox/CoastConditionInputSlider
-@onready var coastConditionLabel : Label = $PanelContainer/Controls/VBoxContainer/CoastConditionBox/HBoxContainer/CoastConditionValueLabel
+@onready var coastConditionSlider : HSlider = $PanelContainer/Controls/CoastConditionBox/CoastConditionInputSlider
+@onready var coastConditionLabel : Label = $PanelContainer/Controls/CoastConditionBox/HBoxContainer/CoastConditionValueLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
